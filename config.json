@@ -1,0 +1,5 @@
+{
+  "ignoreSslErrors":true,
+  "outputEncoding":"utf8",
+  "proxy":"127.0.0.1:8123"
+}
