@@ -6,7 +6,7 @@ from prscrn import take_scrnshot
 from time import sleep
 import os
 
-PROCESSNUM = 15
+PROCESSNUM = 5
 filepath = '/home/jssec/Desktop/scrnshot/{}.png'
 
 class ScrnShotPool:
@@ -49,20 +49,23 @@ class ScrnShotPool:
         pool.join()
         if result.successful():
             print 'all tasks have been finished. exit!'
+            self.idle = True
         else:
             print 'some errors have been accured!'
-        self.idle = True
+
 
     def isIdle(self):
         return self.idle
 
 if __name__ == '__main__':
 
-    scp = ScrnShotPool(test_mode=False)
+    scp = ScrnShotPool(test_mode=True)
     count = 0
-    while scp.isIdle():
-        scp.get_task()
-        scp.run()
+    while True and count <= 5:
+        if scp.isIdle():
+            scp.get_task()
+            scp.run()
         sleep(30)
         print count
         count += 1
+        break
